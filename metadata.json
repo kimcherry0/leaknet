@@ -1,0 +1,6 @@
+{
+  "name": "Dynamic UI Simulator",
+  "description": "Demonstrates how dynamic image generation URLs create realistic simulated UIs like KakaoTalk and DC Inside for roleplaying.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
