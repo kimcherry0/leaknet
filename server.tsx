@@ -34,20 +34,19 @@ async function startServer() {
       // Validate and load fonts
       await loadFonts();
 
-      const board = (req.query.b || req.query.board as string) || "누수구역:자유게시판";
-      const ping = (req.query.p || req.query.ping as string) || "42";
-      const title = (req.query.t || req.query.title as string) || "제목없음";
-      const hash = (req.query.h || req.query.hash as string) || "#NULL";
-      const time = (req.query.d || req.query.time as string) || "00.00.00 00:00";
-      const body = (req.query.c || req.query.body as string) || "내용이 없습니다.";
-      const likes = (req.query.l || req.query.likes as string) || "0";
-      const commentsCount = (req.query.m || req.query.commentsCount as string) || "0";
-      const commentsText = (req.query.r || req.query.commentsText as string) || "";
+      const board = ((req.query.b || req.query.board as string) || "누수구역:자유게시판").replace(/_/g, " ");
+      const ping = ((req.query.p || req.query.ping as string) || "42").replace(/_/g, " ");
+      const title = ((req.query.t || req.query.title as string) || "제목없음").replace(/_/g, " ");
+      const hash = ((req.query.h || req.query.hash as string) || "#NULL").replace(/_/g, " ");
+      const time = ((req.query.d || req.query.time as string) || "00.00.00 00:00").replace(/_/g, " ");
+      const body = ((req.query.c || req.query.body as string) || "내용이 없습니다.").replace(/_/g, " ");
+      const likes = ((req.query.l || req.query.likes as string) || "0").replace(/_/g, " ");
+      const commentsCount = ((req.query.m || req.query.commentsCount as string) || "0").replace(/_/g, " ");
+      const commentsText = ((req.query.r || req.query.commentsText as string) || "").replace(/_/g, " ");
 
-      // Parse comments => expected format "hash^text" per line
+      // Parse comments => expected format "hash^text" per line OR separated by "|"
       const commentsList = commentsText
-        .split("\\n") // sometimes newlines come as literal \n in query params
-        .flatMap(c => c.split("\n"))
+        .split(/\\n|\n|\|/) // Support newline or | (pipe) separator
         .filter(c => c.trim() !== "")
         .map(line => {
           const parts = line.split("^");
