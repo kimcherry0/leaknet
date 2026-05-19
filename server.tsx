@@ -12,8 +12,8 @@ const fontsCache: { pretendard?: ArrayBuffer; d2coding?: ArrayBuffer } = {};
 async function loadFonts() {
   try {
     if (!fontsCache.pretendard) {
-      // Using Pretendard via jsDelivr CDN
-      const res = await fetch("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/packages/pretendard/dist/public/static/Pretendard-Regular.ttf");
+      // Using Pretendard via unpkg
+      const res = await fetch("https://unpkg.com/pretendard@1.3.9/dist/public/static/Pretendard-Regular.otf");
       fontsCache.pretendard = await res.arrayBuffer();
     }
   } catch (err) {
