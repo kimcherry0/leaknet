@@ -306,7 +306,7 @@ export default function UIGenerator() {
                 ? `https://my-api.com/dc?g=${encodeURIComponent(dcGallery)}&t=${encodeURIComponent(dcTitle)}&a=${encodeURIComponent(dcAuthor)}&b=${encodeURIComponent(dcBody)}` 
                 : activeTab === 'kakao' 
                 ? `https://my-api.com/kakao?name=${encodeURIComponent(kakaoSender)}&msg=${encodeURIComponent(kakaoMessage)}&time=${encodeURIComponent(kakaoTime)}`
-                : `https://my-api.com/api/leaknet?b=${encodeURIComponent(lnBoard)}&h=${encodeURIComponent(lnHash)}&c=${encodeURIComponent(lnBody).substring(0,20)}...`}
+                : `${window.location.origin}/api/leaknet?b=${encodeURIComponent(lnBoard)}&h=${encodeURIComponent(lnHash)}&c=${encodeURIComponent(lnBody).substring(0,20)}...`}
             </code>
           </div>
         </div>
