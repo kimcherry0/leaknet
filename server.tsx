@@ -31,17 +31,18 @@ async function startServer() {
   // The actual Image Generation Endpoint (LeakNet)
   app.get("/api/leaknet", async (req, res) => {
     try {
-      await loadFonts(); // Ensure fonts are loaded
+      // Validate and load fonts
+      await loadFonts();
 
-      const board = (req.query.board as string) || "누수구역:자유게시판";
-      const ping = (req.query.ping as string) || "42";
-      const title = (req.query.title as string) || "제목없음";
-      const hash = (req.query.hash as string) || "#NULL";
-      const time = (req.query.time as string) || "00.00.00 00:00";
-      const body = (req.query.body as string) || "내용이 없습니다.";
-      const likes = (req.query.likes as string) || "0";
-      const commentsCount = (req.query.commentsCount as string) || "0";
-      const commentsText = (req.query.commentsText as string) || "";
+      const board = (req.query.b || req.query.board as string) || "누수구역:자유게시판";
+      const ping = (req.query.p || req.query.ping as string) || "42";
+      const title = (req.query.t || req.query.title as string) || "제목없음";
+      const hash = (req.query.h || req.query.hash as string) || "#NULL";
+      const time = (req.query.d || req.query.time as string) || "00.00.00 00:00";
+      const body = (req.query.c || req.query.body as string) || "내용이 없습니다.";
+      const likes = (req.query.l || req.query.likes as string) || "0";
+      const commentsCount = (req.query.m || req.query.commentsCount as string) || "0";
+      const commentsText = (req.query.r || req.query.commentsText as string) || "";
 
       // Parse comments => expected format "hash^text" per line
       const commentsList = commentsText
